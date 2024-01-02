@@ -15,9 +15,6 @@ latest: &latest
 
 jobs:
   build-test:
-    parameters:
-      tag:
-        type: string
     docker:
       - image: hexpm/elixir:1.16.0-erlang-26.2.1-alpine-3.18.4
     working_directory: ~/repo

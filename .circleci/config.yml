@@ -1,7 +1,7 @@
 version: 2.1
 
-latest: &latest
-  pattern: "^1.16.*-erlang-26.*$"
+#latest: &latest
+#  pattern: "^1.16.*-erlang-26.*$"
 
 #tags: &tags
 #  [
@@ -33,7 +33,7 @@ jobs:
             mix archive.install hex nerves_bootstrap --force
       - restore_cache:
           keys:
-            - v1-mix-cache-<< parameters.tag >>-{{ checksum "mix.lock" }}
+            - v1-mix-cache-{{ checksum "mix.lock" }}
       - run: mix deps.get
       - run: mix format --check-formatted
       - run: mix deps.unlock --check-unused
@@ -44,7 +44,7 @@ jobs:
       - run: mix dialyzer
       - run: mix test --exclude release || mix test --exclude release
       - save_cache:
-          key: v1-mix-cache-<< parameters.tag >>-{{ checksum "mix.lock" }}
+          key: v1-mix-cache-{{ checksum "mix.lock" }}
           paths:
             - _build
             - deps
